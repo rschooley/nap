@@ -104,6 +104,11 @@ module.exports.css = (pkg, gzip = @gzip) =>
   for filename, contents of preprocessPkg pkg, 'css'
     writeFile filename, contents unless @usingMiddleware
     output += "<link href='#{@_assetsDir}/#{filename}' rel='stylesheet' type='text/css'>"
+
+  # copy over images for dev
+  image_link_command = 'ln -s ' + @publicDir + '/images ' + @_outputDir + '/public/images'
+  exec image_link_command, (err) ->
+
   output
 
 # Compile the templates into JST['file/path'] : functionString pairs in dev
